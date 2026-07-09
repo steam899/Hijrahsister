@@ -10,59 +10,99 @@ const auth = firebase.auth();
 // 2. IMGBB API KEY (Get this from api.imgbb.com)
 const IMGBB_API_KEY = "50e185b01c7b0fb4206b32827c88a766";
 
-// 3. SCHEMA DEFINITION
+// 3. SKEMA CMS LENGKAP (Memadankan semua elemen pada paparan client)
 const schema = {
     settings: {
-        title: 'General Settings', isSingle: true,
+        title: 'Halaman Utama & Teks', isSingle: true,
         fields: [
-            { name: 'siteName', label: 'Website Name', type: 'text' },
-            { name: 'heroTitle', label: 'Hero Title', type: 'text' },
-            { name: 'heroDesc', label: 'Hero Subtitle', type: 'textarea' },
-            { name: 'heroImg', label: 'Hero Image', type: 'image' },
-            { name: 'aboutTitle', label: 'About Title', type: 'text' },
-            { name: 'aboutDesc', label: 'About Description', type: 'textarea' },
-            { name: 'aboutImg', label: 'About Image', type: 'image' }
+            // Hubungan Jenama & Meta
+            { name: 'siteName', label: 'Nama Website (Logo)', type: 'text' },
+            { name: 'copyright', label: 'Teks Hak Cipta (Copyright)', type: 'text' },
+
+            // Bahagian Hero (Atas Sekali)
+            { name: 'heroTitle', label: 'Hero Title (Tajuk Utama)', type: 'text' },
+            { name: 'heroDesc', label: 'Hero Subtitle (Keterangan)', type: 'textarea' },
+            { name: 'heroImg', label: 'Gambar Hero', type: 'image' },
+            { name: 'nextGatheringTitle', label: 'Tajuk Kad Gathering (e.g. Next Gathering)', type: 'text' },
+            { name: 'nextGatheringSub', label: 'Isi Kad Gathering (e.g. Friday Usrah)', type: 'text' },
+
+            // Bahagian About Us
+            { name: 'aboutTitle', label: 'Tajuk Bahagian About Us', type: 'text' },
+            { name: 'aboutDesc', label: 'Keterangan Bahagian About Us', type: 'textarea' },
+            { name: 'aboutImg', label: 'Gambar Bahagian About Us', type: 'image' },
+
+            // Bahagian Join Us & WhatsApp
+            { name: 'joinTitle', label: 'Tajuk Bahagian Join Us', type: 'text' },
+            { name: 'joinDesc', label: 'Keterangan Bahagian Join Us', type: 'textarea' },
+            { name: 'joinWhatsapp', label: 'Pautan WhatsApp Admin (Mula dengan https://wa.me/)', type: 'text' },
+            { name: 'joinBtnText', label: 'Teks Butang WhatsApp (e.g. Join via WhatsApp)', type: 'text' },
+
+            // Bahagian Kaki (Footer)
+            { name: 'footerQuote', label: 'Petikan Ayat Al-Quran (Footer)', type: 'text' },
+            { name: 'footerQuoteRef', label: 'Rujukan Ayat (e.g. Quran 49:10)', type: 'text' },
+            { name: 'footerAddress', label: 'Alamat Footer', type: 'textarea' },
+            { name: 'footerPhone', label: 'No. Telefon Admin (Teks Paparan)', type: 'text' },
+            { name: 'instagramUrl', label: 'Pautan Instagram (Penuh)', type: 'text' },
+            { name: 'facebookUrl', label: 'Pautan Facebook (Penuh)', type: 'text' },
+            { name: 'telegramUrl', label: 'Pautan Telegram (Penuh)', type: 'text' }
         ]
     },
     activities: {
         title: 'Activities',
         fields: [
-            { name: 'title', label: 'Title', type: 'text' },
-            { name: 'description', label: 'Description', type: 'textarea' },
+            { name: 'title', label: 'Nama Aktiviti', type: 'text' },
+            { name: 'description', label: 'Keterangan Pendek', type: 'textarea' },
             { name: 'icon', label: 'FontAwesome Icon Class (e.g. fa-solid fa-users)', type: 'text' }
         ]
     },
     events: {
         title: 'Events',
         fields: [
-            { name: 'title', label: 'Event Title', type: 'text' },
-            { name: 'category', label: 'Category Badge', type: 'text' },
-            { name: 'date', label: 'Date & Time', type: 'text' },
-            { name: 'venue', label: 'Location', type: 'text' },
-            { name: 'image', label: 'Event Thumbnail', type: 'image' },
-            { name: 'registrationLink', label: 'WhatsApp / Register URL', type: 'text' },
-            { name: 'status', label: 'Status', type: 'select', options: ['Draft', 'Published'] }
+            { name: 'title', label: 'Nama Event', type: 'text' },
+            { name: 'category', label: 'Kategori Event (e.g. USRAH, RETREAT)', type: 'text' },
+            { name: 'date', label: 'Tarikh & Hari (Teks)', type: 'text' },
+            { name: 'venue', label: 'Tempat / Lokasi', type: 'text' },
+            { name: 'image', label: 'Poster Event', type: 'image' },
+            { name: 'registrationLink', label: 'Pautan Pendaftaran Event (WhatsApp/Google Form)', type: 'text' },
+            { name: 'status', label: 'Status Paparan', type: 'select', options: ['Draft', 'Published'] }
+        ]
+    },
+    resources: {
+        title: 'Resources',
+        fields: [
+            { name: 'title', label: 'Tajuk Sumber/Rujukan', type: 'text' },
+            { name: 'description', label: 'Keterangan Pendek', type: 'text' },
+            { name: 'icon', label: 'FontAwesome Icon (e.g. fa-solid fa-headphones)', type: 'text' },
+            { name: 'link', label: 'Pautan Fail / Web Rujukan', type: 'text' }
         ]
     },
     gallery: {
         title: 'Gallery Images',
         fields: [
-            { name: 'caption', label: 'Caption', type: 'text' },
-            { name: 'image', label: 'Upload Image', type: 'image' }
+            { name: 'caption', label: 'Keterangan Ringkas Gambar', type: 'text' },
+            { name: 'image', label: 'Upload Gambar', type: 'image' }
+        ]
+    },
+    testimonials: {
+        title: 'Testimonials',
+        fields: [
+            { name: 'name', label: 'Nama Ahli', type: 'text' },
+            { name: 'position', label: 'Jawatan/Status (e.g. Alumna, 3rd Year)', type: 'text' },
+            { name: 'review', label: 'Komen / Maklum balas', type: 'textarea' }
         ]
     },
     faqs: {
         title: 'FAQs',
         fields: [
-            { name: 'question', label: 'Question', type: 'text' },
-            { name: 'answer', label: 'Answer', type: 'textarea' }
+            { name: 'question', label: 'Soalan', type: 'text' },
+            { name: 'answer', label: 'Jawapan', type: 'textarea' }
         ]
     }
 };
 
 let currentToken = null;
 
-// Auth Listener
+// Mengawal log masuk Firebase Auth
 auth.onAuthStateChanged(async user => {
     if (user) {
         currentToken = await user.getIdToken();
@@ -181,7 +221,7 @@ window.renderForm = function(collectionId, item = null) {
 
         const payload = {};
         
-        // Handle Form Fields & ImgBB Uploads
+        // Memproses fail & muat naik gambar ke ImgBB
         for (const f of config.fields) {
             if (f.type === 'image') {
                 const fileInput = document.getElementById(`file-${f.name}`);
