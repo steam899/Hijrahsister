@@ -10,41 +10,41 @@ const auth = firebase.auth();
 // 2. IMGBB API KEY (Get this from api.imgbb.com)
 const IMGBB_API_KEY = "50e185b01c7b0fb4206b32827c88a766";
 
-// 3. SKEMA CMS LENGKAP (Memadankan semua elemen pada paparan client)
+// 3. SKEMA CMS DENGAN STRUKTUR SEKSYEN DAN DATA ASAL (DEFAULT VALUES)
 const schema = {
     settings: {
         title: 'Halaman Utama & Teks', isSingle: true,
         fields: [
-            // Hubungan Jenama & Meta
-            { name: 'siteName', label: 'Nama Website (Logo)', type: 'text' },
-            { name: 'copyright', label: 'Teks Hak Cipta (Copyright)', type: 'text' },
+            { type: 'heading', label: '🌸 IDENTITI BRANDING WEBSITE' },
+            { name: 'siteName', label: 'Nama Website (Logo)', type: 'text', default: 'Hijrah Sisters' },
+            { name: 'copyright', label: 'Teks Hak Cipta (Copyright)', type: 'text', default: '© 2024 Hijrah Sisters IIUMK. All rights reserved.' },
 
-            // Bahagian Hero (Atas Sekali)
-            { name: 'heroTitle', label: 'Hero Title (Tajuk Utama)', type: 'text' },
-            { name: 'heroDesc', label: 'Hero Subtitle (Keterangan)', type: 'textarea' },
-            { name: 'heroImg', label: 'Gambar Hero', type: 'image' },
-            { name: 'nextGatheringTitle', label: 'Tajuk Kad Gathering (e.g. Next Gathering)', type: 'text' },
-            { name: 'nextGatheringSub', label: 'Isi Kad Gathering (e.g. Friday Usrah)', type: 'text' },
+            { type: 'heading', label: '✨ BAHAGIAN HERO (ATAS SEKALI)' },
+            { name: 'heroTitle', label: 'Tajuk Utama Hero', type: 'text', default: 'A Safe Space for Every Muslimah to Grow' },
+            { name: 'heroDesc', label: 'Keterangan Hero (Subtitle)', type: 'textarea', default: '"Building hearts connected to Allah through knowledge, sincere sisterhood, and meaningful reminders."' },
+            { name: 'heroImg', label: 'Gambar Hero', type: 'image', default: 'https://images.unsplash.com/photo-1542826438-bd32f43d626f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80' },
+            { name: 'nextGatheringTitle', label: 'Tajuk Kad Gathering (e.g. Next Gathering)', type: 'text', default: 'Next Gathering' },
+            { name: 'nextGatheringSub', label: 'Isi Kad Gathering (e.g. Friday Usrah)', type: 'text', default: 'Friday Usrah' },
 
-            // Bahagian About Us
-            { name: 'aboutTitle', label: 'Tajuk Bahagian About Us', type: 'text' },
-            { name: 'aboutDesc', label: 'Keterangan Bahagian About Us', type: 'textarea' },
-            { name: 'aboutImg', label: 'Gambar Bahagian About Us', type: 'image' },
+            { type: 'heading', label: '📖 BAHAGIAN ABOUT US' },
+            { name: 'aboutTitle', label: 'Tajuk About Us', type: 'text', default: 'Nurturing Souls, Building Sisterhood' },
+            { name: 'aboutDesc', label: 'Keterangan About Us', type: 'textarea', default: 'Welcome to Hijrah Sisters IIUMK, a sanctuary designed for Muslim women. We are more than just a community; we are a support system dedicated to nurturing each other spiritually, emotionally, and intellectually.\n\nIn a fast-paced world, we provide a calm, welcoming space to pause, reflect, and reconnect with our Creator and our true selves.' },
+            { name: 'aboutImg', label: 'Gambar About Us', type: 'image', default: 'https://images.unsplash.com/photo-1507914372368-b2b085cc1450?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80' },
 
-            // Bahagian Join Us & WhatsApp
-            { name: 'joinTitle', label: 'Tajuk Bahagian Join Us', type: 'text' },
-            { name: 'joinDesc', label: 'Keterangan Bahagian Join Us', type: 'textarea' },
-            { name: 'joinWhatsapp', label: 'Pautan WhatsApp Admin (Mula dengan https://wa.me/)', type: 'text' },
-            { name: 'joinBtnText', label: 'Teks Butang WhatsApp (e.g. Join via WhatsApp)', type: 'text' },
+            { type: 'heading', label: '🤝 BAHAGIAN JOIN US (WHATSAPP)' },
+            { name: 'joinTitle', label: 'Tajuk Join Us', type: 'text', default: 'Become Part of Our Sisterhood' },
+            { name: 'joinDesc', label: 'Keterangan Join Us', type: 'textarea', default: 'Whether you are taking your first steps towards practicing or looking for a community to help you stay steadfast, there is a place for you here.' },
+            { name: 'joinWhatsapp', label: 'Pautan WhatsApp Admin', type: 'text', default: 'https://wa.me/YOUR_PHONE_NUMBER_HERE?text=Assalamu%27alaikum!%20I%20am%20interested%20in%20joining%20Hijrah%20Sisters%20IIUMK.' },
+            { name: 'joinBtnText', label: 'Teks Butang WhatsApp', type: 'text', default: 'Join via WhatsApp' },
 
-            // Bahagian Kaki (Footer)
-            { name: 'footerQuote', label: 'Petikan Ayat Al-Quran (Footer)', type: 'text' },
-            { name: 'footerQuoteRef', label: 'Rujukan Ayat (e.g. Quran 49:10)', type: 'text' },
-            { name: 'footerAddress', label: 'Alamat Footer', type: 'textarea' },
-            { name: 'footerPhone', label: 'No. Telefon Admin (Teks Paparan)', type: 'text' },
-            { name: 'instagramUrl', label: 'Pautan Instagram (Penuh)', type: 'text' },
-            { name: 'facebookUrl', label: 'Pautan Facebook (Penuh)', type: 'text' },
-            { name: 'telegramUrl', label: 'Pautan Telegram (Penuh)', type: 'text' }
+            { type: 'heading', label: '📌 FOOTER & MEDIA SOSIAL' },
+            { name: 'footerQuote', label: 'Petikan Ayat Al-Quran', type: 'text', default: 'Indeed, the believers are but brothers (and sisters).' },
+            { name: 'footerQuoteRef', label: 'Rujukan Ayat Al-Quran (e.g. Quran 49:10)', type: 'text', default: '(Qur\'an 49:10)' },
+            { name: 'footerAddress', label: 'Alamat Kaki Website', type: 'textarea', default: 'IIUM Kuantan Campus,\nPahang, Malaysia' },
+            { name: 'footerPhone', label: 'No. Telefon Paparan', type: 'text', default: '+60 12-345 6789 (Admin)' },
+            { name: 'instagramUrl', label: 'Pautan Instagram', type: 'text', default: '#' },
+            { name: 'facebookUrl', label: 'Pautan Facebook', type: 'text', default: '#' },
+            { name: 'telegramUrl', label: 'Pautan Telegram', type: 'text', default: '#' }
         ]
     },
     activities: {
@@ -63,23 +63,23 @@ const schema = {
             { name: 'date', label: 'Tarikh & Hari (Teks)', type: 'text' },
             { name: 'venue', label: 'Tempat / Lokasi', type: 'text' },
             { name: 'image', label: 'Poster Event', type: 'image' },
-            { name: 'registrationLink', label: 'Pautan Pendaftaran Event (WhatsApp/Google Form)', type: 'text' },
+            { name: 'registrationLink', label: 'Pautan Pendaftaran Event', type: 'text' },
             { name: 'status', label: 'Status Paparan', type: 'select', options: ['Draft', 'Published'] }
         ]
     },
     resources: {
         title: 'Resources',
         fields: [
-            { name: 'title', label: 'Tajuk Sumber/Rujukan', type: 'text' },
-            { name: 'description', label: 'Keterangan Pendek', type: 'text' },
-            { name: 'icon', label: 'FontAwesome Icon (e.g. fa-solid fa-headphones)', type: 'text' },
-            { name: 'link', label: 'Pautan Fail / Web Rujukan', type: 'text' }
+            { name: 'title', label: 'Tajuk Rujukan', type: 'text' },
+            { name: 'description', label: 'Keterangan Rujukan', type: 'text' },
+            { name: 'icon', label: 'Icon Class (e.g. fa-solid fa-book)', type: 'text' },
+            { name: 'link', label: 'Pautan Fail/Laman', type: 'text' }
         ]
     },
     gallery: {
         title: 'Gallery Images',
         fields: [
-            { name: 'caption', label: 'Keterangan Ringkas Gambar', type: 'text' },
+            { name: 'caption', label: 'Keterangan Gambar', type: 'text' },
             { name: 'image', label: 'Upload Gambar', type: 'image' }
         ]
     },
@@ -87,15 +87,15 @@ const schema = {
         title: 'Testimonials',
         fields: [
             { name: 'name', label: 'Nama Ahli', type: 'text' },
-            { name: 'position', label: 'Jawatan/Status (e.g. Alumna, 3rd Year)', type: 'text' },
-            { name: 'review', label: 'Komen / Maklum balas', type: 'textarea' }
+            { name: 'position', label: 'Status (e.g. Alumna, 3rd Year)', type: 'text' },
+            { name: 'review', label: 'Ulasan Ahli', type: 'textarea' }
         ]
     },
     faqs: {
         title: 'FAQs',
         fields: [
-            { name: 'question', label: 'Soalan', type: 'text' },
-            { name: 'answer', label: 'Jawapan', type: 'textarea' }
+            { name: 'question', label: 'Soalan FAQ', type: 'text' },
+            { name: 'answer', label: 'Jawapan FAQ', type: 'textarea' }
         ]
     }
 };
@@ -159,12 +159,12 @@ async function loadCollection(collectionId) {
         const data = await apiCall(collectionId);
         
         let html = `<table class="w-full text-left"><thead><tr class="border-b border-gray-700">`;
-        config.fields.slice(0, 3).forEach(f => html += `<th class="p-3">${f.label}</th>`);
+        config.fields.filter(f => f.type !== 'heading').slice(0, 3).forEach(f => html += `<th class="p-3">${f.label}</th>`);
         html += `<th class="p-3 text-right">Actions</th></tr></thead><tbody>`;
 
         data.forEach(item => {
             html += `<tr class="border-b border-gray-700 hover:bg-gray-750">`;
-            config.fields.slice(0, 3).forEach(f => {
+            config.fields.filter(f => f.type !== 'heading').slice(0, 3).forEach(f => {
                 const val = item[f.name] || '';
                 html += `<td class="p-3">${f.type === 'image' ? `<img src="${val}" class="w-12 h-12 object-cover rounded">` : val}</td>`;
             });
@@ -184,24 +184,38 @@ window.renderForm = function(collectionId, item = null) {
     
     let html = `<form id="dynamic-form" class="space-y-6 max-w-2xl">`;
     config.fields.forEach(f => {
+        // Paparkan pengepala seksyen jika ianya jenis 'heading'
+        if (f.type === 'heading') {
+            html += `
+                <div class="pt-8 border-t border-gray-700 mt-8 first:pt-0 first:mt-0 first:border-none">
+                    <h3 class="text-lg font-serif font-bold text-pink-400 flex items-center gap-2">
+                        ${f.label}
+                    </h3>
+                </div>`;
+            return;
+        }
+
+        // Tentukan nilai lalai (default value) dari data client jika tiada rekod dalam database
         const val = item ? item[f.name] : '';
+        const displayVal = (val !== undefined && val !== null && val !== '') ? val : (f.default || '');
+
         html += `<div><label class="block text-sm font-bold mb-2 text-gray-300">${f.label}</label>`;
         
         if (f.type === 'textarea') {
-            html += `<textarea id="${f.name}" class="w-full p-3 bg-gray-700 border-none rounded text-white" rows="4">${val || ''}</textarea>`;
+            html += `<textarea id="${f.name}" class="w-full p-3 bg-gray-700 border-none rounded text-white" rows="4">${displayVal}</textarea>`;
         } else if (f.type === 'image') {
             html += `
                 <div class="flex items-center gap-4 bg-gray-700 p-3 rounded">
-                    ${val ? `<img src="${val}" width="60" class="rounded">` : ''}
+                    ${displayVal ? `<img src="${displayVal}" id="preview-${f.name}" width="60" class="rounded shadow">` : ''}
                     <input type="file" id="file-${f.name}" accept="image/*" class="text-sm">
-                    <input type="hidden" id="${f.name}" value="${val || ''}">
+                    <input type="hidden" id="${f.name}" value="${displayVal}">
                 </div>`;
         } else if (f.type === 'select') {
             html += `<select id="${f.name}" class="w-full p-3 bg-gray-700 border-none rounded text-white">`;
-            f.options.forEach(opt => html += `<option value="${opt}" ${val===opt?'selected':''}>${opt}</option>`);
+            f.options.forEach(opt => html += `<option value="${opt}" ${displayVal===opt?'selected':''}>${opt}</option>`);
             html += `</select>`;
         } else {
-            html += `<input type="text" id="${f.name}" value="${val || ''}" class="w-full p-3 bg-gray-700 border-none rounded text-white">`;
+            html += `<input type="text" id="${f.name}" value="${displayVal}" class="w-full p-3 bg-gray-700 border-none rounded text-white">`;
         }
         html += `</div>`;
     });
@@ -223,6 +237,8 @@ window.renderForm = function(collectionId, item = null) {
         
         // Memproses fail & muat naik gambar ke ImgBB
         for (const f of config.fields) {
+            if (f.type === 'heading') continue; // Abaikan pengepala seksyen semasa menyimpan
+
             if (f.type === 'image') {
                 const fileInput = document.getElementById(`file-${f.name}`);
                 if (fileInput.files.length > 0) {
