@@ -104,9 +104,9 @@ app.delete('/api/admin/:collection/:id', verifyToken, async (req, res) => {
         res.json({ message: 'Deleted successfully' });
     } catch (error) { res.status(500).json({ error: error.message }); }
 });
-
 // --- HALUAN TRAFIK (Routing) ---
-app.get('/admin', (req, res) => {
+// Menyokong kedua-dua format: /admin ATAU /admin/
+app.get(['/admin', '/admin/'], (req, res) => {
     res.sendFile(path.join(__dirname, 'public/admin/index.html'));
 });
 
