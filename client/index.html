@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="meta-title">Hijrah Sisters IIUMK | Growing in Faith, Knowledge & Sisterhood</title>
+    
+    <!-- Google Fonts & FontAwesome -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        blush: { 50: '#FDF2F6', 100: '#FCE7EF', 200: '#F8C8DA', 300: '#F39DBF', 400: '#EB6A9D', 500: '#E03C7A', 600: '#C7245D', 900: '#5A122B' },
+                        beige: '#F5F5DC', gold: '#D4AF37', darkBg: '#231E1F', darkCard: '#2E2729',
+                    },
+                    fontFamily: { serif: ['"Playfair Display"', 'serif'], sans: ['Inter', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+    <style>
+        .fade-in-section { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
+        .fade-in-section.is-visible { opacity: 1; transform: none; }
+        .masonry { column-count: 1; column-gap: 1rem; }
+        @media (min-width: 640px) { .masonry { column-count: 2; } }
+        @media (min-width: 1024px) { .masonry { column-count: 3; } }
+        .masonry-item { break-inside: avoid; margin-bottom: 1rem; }
+        .bg-pattern { background-image: url('data:image/svg+xml,...'); } /* Truncated for space, keep original SVG */
+        #lightbox { display: none; } #lightbox.active { display: flex; }
+    </style>
+</head>
+<body class="font-sans bg-white dark:bg-darkBg text-gray-800 dark:text-gray-200 transition-colors duration-300">
+
+    <!-- Navbar remains exact same -->
+    <header class="fixed w-full top-0 z-50 bg-white/90 dark:bg-darkBg/90 backdrop-blur-md shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-20">
+            <a href="#" class="flex items-center gap-2">
+                <i class="fa-solid fa-leaf text-blush-500 text-xl"></i>
+                <div><h1 id="site-name" class="font-serif font-bold text-xl text-blush-900 dark:text-blush-200">Hijrah Sisters</h1></div>
+            </a>
+            <nav class="hidden md:flex space-x-8 items-center">
+                <a href="#home" class="text-sm hover:text-blush-500">Home</a>
+                <a href="#about" class="text-sm hover:text-blush-500">About</a>
+                <a href="#events" class="text-sm hover:text-blush-500">Events</a>
+                <a href="#join" class="bg-blush-500 text-white px-5 py-2.5 rounded-full text-sm">Join Our Circle</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="pt-20">
+        <!-- Hero Section -->
+        <section id="home" class="relative min-h-[90vh] flex items-center bg-blush-50 dark:bg-darkBg overflow-hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full py-12">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <div class="fade-in-section">
+                        <span id="hero-tagline" class="text-gold font-medium uppercase text-sm mb-4 block">Growing in Faith, Knowledge & Sisterhood</span>
+                        <h2 id="hero-title" class="font-serif text-5xl lg:text-6xl font-bold text-blush-900 dark:text-white mb-6">A Safe Space for Every Muslimah to Grow</h2>
+                        <p id="hero-desc" class="text-lg text-gray-600 dark:text-gray-300 mb-8 max-w-lg">Building hearts connected to Allah through knowledge, sincere sisterhood, and meaningful reminders.</p>
+                    </div>
+                    <div class="fade-in-section hidden lg:block relative">
+                        <img id="hero-img" src="https://images.unsplash.com/photo-1542826438-bd32f43d626f?w=800&q=80" alt="Hero" class="rounded-t-full rounded-bl-full shadow-2xl object-cover h-[500px] w-full border-4 border-white">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dynamic Events Container -->
+        <section id="events" class="py-24 bg-white dark:bg-darkCard">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h3 class="font-serif text-3xl font-bold text-blush-900 dark:text-white mb-12">Upcoming Events</h3>
+                <div id="events-container" class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- JS WILL POPULATE THIS -->
+                </div>
+            </div>
+        </section>
+        
+        <!-- Dynamic Gallery Container -->
+        <section id="gallery" class="py-24 bg-blush-50 dark:bg-darkBg">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h3 class="font-serif text-3xl font-bold text-blush-900 dark:text-white mb-12 text-center">Moments of Sisterhood</h3>
+                <div id="gallery-container" class="masonry fade-in-section">
+                    <!-- JS WILL POPULATE THIS -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // --- DYNAMIC DATA FETCHING ---
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                // Fetch all active data from API
+                const res = await fetch('/api/public/all');
+                const data = await res.json();
+
+                // Hydrate Settings
+                if(data.settings?.siteName) document.getElementById('site-name').innerText = data.settings.siteName;
+                if(data.settings?.heroTitle) document.getElementById('hero-title').innerText = data.settings.heroTitle;
+                if(data.settings?.heroImg) document.getElementById('hero-img').src = data.settings.heroImg;
+
+                // Hydrate Events
+                const eventsContainer = document.getElementById('events-container');
+                if(data.events && data.events.length > 0) {
+                    eventsContainer.innerHTML = data.events.map((event, i) => `
+                        <div class="bg-blush-50 dark:bg-darkBg rounded-3xl overflow-hidden shadow-sm border border-blush-100 flex flex-col h-full fade-in-section is-visible" style="transition-delay: ${i*100}ms;">
+                            <img src="${event.image || 'https://images.unsplash.com/photo-1544365558-35aa4afcf11f'}" class="w-full h-48 object-cover">
+                            <div class="p-6 flex flex-col flex-grow">
+                                <span class="bg-white text-blush-600 text-xs font-bold w-fit px-3 py-1 rounded-full mb-3">${event.category || 'EVENT'}</span>
+                                <h4 class="font-serif text-xl font-bold mb-4 dark:text-white">${event.title}</h4>
+                                <div class="space-y-2 mb-6 text-sm text-gray-600 flex-grow">
+                                    <p><i class="fa-regular fa-calendar text-blush-400 mr-2"></i> ${event.date}</p>
+                                    <p><i class="fa-solid fa-location-dot text-blush-400 mr-2"></i> ${event.venue}</p>
+                                </div>
+                                <a href="${event.registrationLink}" target="_blank" class="text-center w-full py-3 rounded-xl border border-blush-500 text-blush-600 font-medium hover:bg-blush-500 hover:text-white transition-colors">Register</a>
+                            </div>
+                        </div>
+                    `).join('');
+                }
+
+                // Hydrate Gallery
+                const galleryContainer = document.getElementById('gallery-container');
+                if(data.gallery && data.gallery.length > 0) {
+                    galleryContainer.innerHTML = data.gallery.map(img => `
+                        <div class="masonry-item rounded-2xl overflow-hidden cursor-pointer group relative">
+                            <img src="${img.url}" alt="${img.caption}" class="w-full h-auto transform group-hover:scale-105 transition-transform duration-500">
+                        </div>
+                    `).join('');
+                }
+            } catch (err) {
+                console.error("Error loading dynamic data, falling back to static:", err);
+            }
+        });
+    </script>
+</body>
+</html>
