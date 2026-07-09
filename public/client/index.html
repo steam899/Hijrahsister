@@ -652,9 +652,32 @@
                             document.getElementById('footer-phone-link').textContent = s.footerPhone;
                             document.getElementById('footer-phone-link').href = "tel:" + s.footerPhone.replace(/\D/g,'');
                         }
-                        if (s.instagramUrl) document.getElementById('footer-instagram').href = s.instagramUrl;
-                        if (s.facebookUrl) document.getElementById('footer-facebook').href = s.facebookUrl;
-                        if (s.telegramUrl) document.getElementById('footer-telegram').href = s.telegramUrl;
+                       // Fungsi pintar untuk urus pautan sosial media (Buka tab baru & Elak skrol ke atas jika kosong)
+const setSocialMediaLink = (elementId, url) => {
+    const el = document.getElementById(elementId);
+    if (el) {
+        if (url && url !== '#' && url.trim() !== '') {
+            el.href = url;
+            el.target = "_blank";                  // Buka di tab baru
+            el.rel = "noopener noreferrer";         // Faktor keselamatan browser
+            el.style.opacity = "1";
+            el.style.cursor = "pointer";
+        } else {
+            // Jika kosong, sekat pergerakan skrol ke atas
+            el.addEventListener('click', (e) => e.preventDefault());
+            el.style.opacity = "0.3";              // Kelamkan icon (anda boleh tukar kepada class hidden jika mahu sembunyikan)
+            el.style.cursor = "not-allowed";
+            el.title = "Belum dikonfigurasi di Admin Panel";
+        }
+    }
+};
+
+// Aktifkan pautan
+setSocialMediaLink('footer-instagram', s.instagramUrl);
+setSocialMediaLink('footer-facebook', s.facebookUrl);
+setSocialMediaLink('footer-telegram', s.telegramUrl);
+setSocialMediaLink('footer-tiktok', s.tiktokUrl);
+                        
                         if (s.copyright) document.getElementById('footer-copyright').innerHTML = s.copyright;
                         if (s.footerCredit) document.getElementById('footer-credit').innerHTML = s.footerCredit;
                     }
