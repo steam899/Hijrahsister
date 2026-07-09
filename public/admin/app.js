@@ -1,15 +1,14 @@
-// 1. FIREBASE AUTH CONFIG (Sila gantikan dengan Firebase Web Config anda sendiri)
+// 1. FIREBASE AUTH CONFIG (Replace with your Firebase Web Config)
 const firebaseConfig = {
-    apiKey: "YOUR_FIREBASE_API_KEY",
-    authDomain: "YOUR_PROJECT.firebaseapp.com",
-    projectId: "YOUR_PROJECT"
+    apiKey: "AIzaSyATtQm1xsf3bOlIB1xR76koRP2zAGBGdMs",
+    authDomain: "hijrahsister.firebaseapp.com",
+    projectId: "hijrahsister"
 };
 firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 
-// 2. IMGBB API KEY (Ganti dengan kunci ImgBB anda)
-const IMGBB_API_KEY = "YOUR_IMGBB_API_KEY_HERE";
-
+// 2. IMGBB API KEY (Get this from api.imgbb.com)
+const IMGBB_API_KEY = "50e185b01c7b0fb4206b32827c88a766";
 // 3. SKEMA CMS 100% DINAMIK - MEMUATKAN SEMUA DATA ASAL DARI CLIENT INDEX.HTML
 const schema = {
     settings: {
