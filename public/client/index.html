@@ -499,9 +499,6 @@
                 });
             }, appearOptions);
 
-            // Sila tambah ini supaya elemen asal tidak lagi tersangkut/halimunan semasa mula-mula buka page:
-            document.querySelectorAll('.fade-in-section').forEach(f => appearOnScroll.observe(f));
-            
             // --- HYDRATION ENGINE ---
             (async function() {
                 try {
@@ -541,9 +538,18 @@
                         if (s.heroJoinBtn) document.getElementById('hero-primary-btn').textContent = s.heroJoinBtn;
                         if (s.heroExploreBtn) document.getElementById('hero-secondary-btn').textContent = s.heroExploreBtn;
 
-                        if (s.nextGatheringIcon) document.getElementById('next-gathering-icon').className = s.nextGatheringIcon + ' text-xl';
-                        if (s.nextGatheringTitle) document.getElementById('next-gathering-title').textContent = s.nextGatheringTitle;
-                        if (s.nextGatheringSub) document.getElementById('next-gathering-sub').textContent = s.nextGatheringSub;
+                        if (s.nextGatheringIcon) {
+                            const ngIcon = document.getElementById('next-gathering-icon');
+                            if(ngIcon) ngIcon.className = s.nextGatheringIcon + ' text-xl';
+                        }
+                        if (s.nextGatheringTitle) {
+                            const ngTitle = document.getElementById('next-gathering-title');
+                            if(ngTitle) ngTitle.textContent = s.nextGatheringTitle;
+                        }
+                        if (s.nextGatheringSub) {
+                            const ngSub = document.getElementById('next-gathering-sub');
+                            if(ngSub) ngSub.textContent = s.nextGatheringSub;
+                        }
 
                         if (s.aboutTitle) document.getElementById('about-title-text').textContent = s.aboutTitle;
                         if (s.aboutDesc1) document.getElementById('about-desc1-text').textContent = s.aboutDesc1;
@@ -554,10 +560,22 @@
                         if (s.aboutImg) document.getElementById('about-img-el').src = s.aboutImg;
 
                         if (s.activitiesTitle) document.getElementById('activities-title-text').textContent = s.activitiesTitle;
-                        if (s.eventsTitle) document.getElementById('events-title-text').textContent = s.eventsTitle;
-                        if (s.eventsSubtitle) document.getElementById('events-subtitle-text').textContent = s.eventsSubtitle;
-                        if (s.eventsFilterAll) document.getElementById('filter-btn-all').textContent = s.eventsFilterAll;
-                        if (s.eventsFilterMonth) document.getElementById('filter-btn-month').textContent = s.eventsFilterMonth;
+                        if (s.eventsTitle) {
+                            const evTitle = document.getElementById('events-title-text');
+                            if(evTitle) evTitle.textContent = s.eventsTitle;
+                        }
+                        if (s.eventsSubtitle) {
+                            const evSub = document.getElementById('events-subtitle-text');
+                            if(evSub) evSub.textContent = s.eventsSubtitle;
+                        }
+                        if (s.eventsFilterAll) {
+                            const evFilterAll = document.getElementById('filter-btn-all');
+                            if(evFilterAll) evFilterAll.textContent = s.eventsFilterAll;
+                        }
+                        if (s.eventsFilterMonth) {
+                            const evFilterMonth = document.getElementById('filter-btn-month');
+                            if(evFilterMonth) evFilterMonth.textContent = s.eventsFilterMonth;
+                        }
                         if (s.resourcesTitle) document.getElementById('resources-title-text').textContent = s.resourcesTitle;
                         if (s.resourcesSubtitle) document.getElementById('resources-subtitle-text').textContent = s.resourcesSubtitle;
                         if (s.galleryTitle) document.getElementById('gallery-title-text').textContent = s.galleryTitle;
@@ -623,22 +641,25 @@ setSocialMediaLink('footer-tiktok', s.tiktokUrl);
                     }
 
                     if (data.events && data.events.length > 0) {
-                        document.getElementById('events-grid').innerHTML = data.events.map((evt, i) => `
-                            <div class="bg-blush-50 dark:bg-darkBg rounded-3xl overflow-hidden shadow-sm border border-blush-100 dark:border-gray-800 fade-in-section flex flex-col h-full" style="transition-delay: ${i * 100}ms;">
-                                <img src="${evt.image}" alt="${evt.title}" class="w-full h-48 object-cover">
-                                <div class="p-6 flex flex-col flex-grow">
-                                    <div class="flex gap-2 mb-3">
-                                        <span class="bg-white dark:bg-darkCard text-blush-600 dark:text-blush-400 text-xs font-bold px-3 py-1 rounded-full shadow-sm">${evt.category.toUpperCase()}</span>
+                        const evGrid = document.getElementById('events-grid');
+                        if(evGrid) {
+                            evGrid.innerHTML = data.events.map((evt, i) => `
+                                <div class="bg-blush-50 dark:bg-darkBg rounded-3xl overflow-hidden shadow-sm border border-blush-100 dark:border-gray-800 fade-in-section flex flex-col h-full" style="transition-delay: ${i * 100}ms;">
+                                    <img src="${evt.image}" alt="${evt.title}" class="w-full h-48 object-cover">
+                                    <div class="p-6 flex flex-col flex-grow">
+                                        <div class="flex gap-2 mb-3">
+                                            <span class="bg-white dark:bg-darkCard text-blush-600 dark:text-blush-400 text-xs font-bold px-3 py-1 rounded-full shadow-sm">${evt.category.toUpperCase()}</span>
+                                        </div>
+                                        <h4 class="font-serif text-xl font-bold mb-4 dark:text-white">${evt.title}</h4>
+                                        <div class="space-y-2 mb-6 text-sm text-gray-600 dark:text-gray-400 flex-grow">
+                                            <p><i class="fa-regular fa-calendar text-blush-400 mr-2 w-4"></i> ${evt.date}</p>
+                                            <p><i class="fa-solid fa-location-dot text-blush-400 mr-2 w-4"></i> ${evt.venue}</p>
+                                        </div>
+                                        <a href="${evt.registrationLink || '#'}" target="_blank" class="w-full py-3 rounded-xl border border-blush-500 text-blush-600 dark:text-blush-300 font-medium hover:bg-blush-500 hover:text-white transition-colors text-center block">Register via WhatsApp</a>
                                     </div>
-                                    <h4 class="font-serif text-xl font-bold mb-4 dark:text-white">${evt.title}</h4>
-                                    <div class="space-y-2 mb-6 text-sm text-gray-600 dark:text-gray-400 flex-grow">
-                                        <p><i class="fa-regular fa-calendar text-blush-400 mr-2 w-4"></i> ${evt.date}</p>
-                                        <p><i class="fa-solid fa-location-dot text-blush-400 mr-2 w-4"></i> ${evt.venue}</p>
-                                    </div>
-                                    <a href="${evt.registrationLink || '#'}" target="_blank" class="w-full py-3 rounded-xl border border-blush-500 text-blush-600 dark:text-blush-300 font-medium hover:bg-blush-500 hover:text-white transition-colors text-center block">Register via WhatsApp</a>
                                 </div>
-                            </div>
-                        `).join('');
+                            `).join('');
+                        }
                     }
 
                     if (data.resources && data.resources.length > 0) {
@@ -687,4 +708,24 @@ setSocialMediaLink('footer-tiktok', s.tiktokUrl);
                                 <summary class="flex cursor-pointer items-center justify-between gap-1.5 p-5 text-gray-900 dark:text-white font-medium">
                                     <h2 class="font-serif text-lg">${faq.question}</h2>
                                     <span class="relative size-5 shrink-0">
-                                        <i class="fa-solid fa-plus absolute
+                                        <i class="fa-solid fa-plus absolute inset-0 opacity-100 group-open:opacity-0 transition-opacity"></i>
+                                        <i class="fa-solid fa-minus absolute inset-0 opacity-0 group-open:opacity-100 transition-opacity"></i>
+                                    </span>
+                                </summary>
+                                <div class="px-5 pb-5 text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
+                                    ${faq.answer}
+                                </div>
+                            </details>
+                        `).join('');
+                    }
+
+                    document.querySelectorAll('.fade-in-section').forEach(f => appearOnScroll.observe(f));
+
+                } catch (err) {
+                    console.log("Using built-in static mock templates.", err);
+                }
+            })();
+        });
+    </script>
+</body>
+</html>
