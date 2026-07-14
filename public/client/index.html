@@ -103,7 +103,7 @@
 
     <main class="pt-20">
         <!-- Hero Section -->
-        <section id="home" class="relative min-h-[90vh] flex items-center bg-blush-50 dark:bg-darkBg overflow-hidden transition-all duration-500">
+        <section id="home" class="relative min-h-[90vh] flex items-center bg-blush-50 dark:bg-darkBg overflow-hidden">
             <div class="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 rounded-full bg-blush-100 dark:bg-darkCard opacity-50 blur-3xl"></div>
             <div class="absolute bottom-0 left-0 -ml-20 -mb-20 w-72 h-72 rounded-full bg-beige dark:bg-blush-900 opacity-30 blur-3xl"></div>
 
@@ -636,8 +636,9 @@ setSocialMediaLink('footer-tiktok', s.tiktokUrl);
                         document.getElementById('gallery-grid').innerHTML = data.gallery.map(img => `
                             <div class="masonry-item rounded-2xl overflow-hidden cursor-pointer group relative">
                                 <img src="${img.image}" alt="${img.caption || 'Gallery Image'}" class="w-full h-auto transform group-hover:scale-105 transition-transform duration-500 gallery-img">
-                                <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                                    <i class="fa-solid fa-expand text-white text-2xl"></i>
+                                <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center p-4 text-center select-none">
+                                    <i class="fa-solid fa-expand text-white text-xl mb-2"></i>
+                                    ${img.caption ? `<span class="text-white text-[10px] uppercase tracking-wider font-bold bg-pink-600/90 px-3 py-1.5 rounded-full shadow-sm">${img.caption}</span>` : ''}
                                 </div>
                             </div>
                         `).join('');
