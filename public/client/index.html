@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
         <!-- Favicon / Navicon (Ikon pada Tab Browser) -->
-    <link rel="icon" type="image/png" href="/client/logo.png">
+    <link class="rounded-full" rel="icon" type="image/png" href="/client/logo.png">
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -447,7 +447,8 @@
             lightbox.addEventListener('click', (e) => { if (e.target !== lightboxImg) closeBox(); });
             document.addEventListener('keydown', (e) => { if (e.key === "Escape" && lightbox.classList.contains('active')) closeBox(); });
 
-            const appearOptions = { threshold: 0.15, rootMargin: "0px 0px -50px 0px" };
+            // SENSITIVITI ANIMASI MOBILE DIKEMASKINI DARI 0.15 KE 0.01 (BUG FIX MUKTAMAD GAMBAR HIDDEN)
+            const appearOptions = { threshold: 0.01, rootMargin: "0px 0px -10px 0px" };
             const appearOnScroll = new IntersectionObserver((entries, observer) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
@@ -594,7 +595,7 @@ setSocialMediaLink('footer-tiktok', s.tiktokUrl);
                             <div class="bg-white dark:bg-darkCard p-8 rounded-2xl shadow-sm hover:shadow-md transition-shadow text-center fade-in-section group relative overflow-hidden" style="transition-delay: ${i * 100}ms;">
                                 
                                 <!-- GAMBAR WATERMARK LATAR BELAKANG KAD AKTIVITI (OPACITY DIKEMASKINI LEBIH KELIHATAN JELAS) -->
-                                ${act.image ? `<div class="absolute inset-0 z-0 opacity-[0.55] dark:opacity-[0.28] bg-cover bg-center group-hover:scale-110 transition-transform duration-700" style="background-image: url('${act.image}');"></div>` : ''}
+                                ${act.image ? `<div class="absolute inset-0 z-0 opacity-[0.25] dark:opacity-[0.12] bg-cover bg-center group-hover:scale-110 transition-transform duration-700" style="background-image: url('${act.image}');"></div>` : ''}
                                 
                                 <div class="relative z-10">
                                     <div class="w-16 h-16 mx-auto bg-blush-100 dark:bg-blush-900/30 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
@@ -617,14 +618,12 @@ setSocialMediaLink('footer-tiktok', s.tiktokUrl);
                         `).join('');
                     }
 
-                    // HOVER BADGE CAPTION DI TENGAH-TENGAH GAMBAR GALLERY (ELEGANT PILL SHIELD)
                     if (data.gallery && data.gallery.length > 0) {
                         document.getElementById('gallery-grid').innerHTML = data.gallery.map(img => `
                             <div class="masonry-item rounded-2xl overflow-hidden cursor-pointer group relative">
                                 <img src="${img.image}" alt="${img.caption || 'Gallery Image'}" class="w-full h-auto transform group-hover:scale-105 transition-transform duration-500 gallery-img">
-                                <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center p-4 text-center select-none">
-                                    <i class="fa-solid fa-expand text-white text-xl mb-2"></i>
-                                    ${img.caption ? `<span class="text-white text-[10px] uppercase tracking-wider font-bold bg-pink-600/90 px-3 py-1.5 rounded-full shadow-sm">${img.caption}</span>` : ''}
+                                <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                                    <i class="fa-solid fa-expand text-white text-2xl"></i>
                                 </div>
                             </div>
                         `).join('');
